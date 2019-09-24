@@ -29,6 +29,9 @@ Dependencies:
 	- If you do not see JRE1.8xxxx, but you know the JDK or JRE is installed, then Install JREs, Add..., Standard VM, Directory..., navigate to the folder jre1.8xxxx (usually within Program Files), highlight and Select Folder, Finish, Apply and Close, now select Alternative JRE jre1.8xxxx, click Finish, and Apply and Close.
 	- If none of the steps worked for you, check to see that Java 8 is installed on your machine.
 
+Branching:
+  - I am currently testing branching.
+
 Extra:
   - JavaFX Scene Builder
     - Download at: https://gluonhq.com/products/scene-builder/#download
