@@ -35,7 +35,7 @@ Branching:
   - Write the code you want. You can also push the new branch to Github to discuss the code with your team.
   - When you're done coding, and you have committed to your branch. You can try to merge to the master branch (only do so if your code is completed).
   - To merge a branch, you will need to checkout the master then attempt to merge with the branch you were working on.
-  - If you have a merge conflict, google it.
+  - If you have a merge conflict, double click on the files in red (in Git Perspective within Git Staging). This will open up a Merge Tool which will allow you to see the conflicts between when merging the two branches. You can only edit one, so make it what you want the result to be. The attempt to merge again. Google is your friend.
 
 Extra:
   - JavaFX Scene Builder
