@@ -35,7 +35,7 @@ Branching:
   - Write the code you want. You can also push the new branch to Github to discuss the code with your team.
   - When you're done coding, and you have committed to your branch. You can try to merge to the master branch (only do so if your code is completed).
   - To merge a branch, right now it seems easier to use the github website to do merges, but let me keep trying
-  - I am currently testing branching.
+  - Enter merge conflict.
 
 Extra:
   - JavaFX Scene Builder
