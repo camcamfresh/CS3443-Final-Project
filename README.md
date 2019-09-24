@@ -25,8 +25,8 @@ Dependencies:
   - If you recently downloaded this project you may need to configure your JRE System Library:
     - Goto: Project, Properties, Java Build Path, and select Libraries.
 	- Remove all existing Libraries, Add Library, JRE System Library.
-	- If Workspace defualt JRE is "JRE1.8xxxx" (where xxxx is the build version), then click that, finish & apply.
-	- If you do not see JRE1.8xxxx, but you know the JDK or JRE is installed, then Install JREs, Add..., Standard VM, Directory..., navigate to the folder jre1.8xxxx (usually within Program Files), higlight and Select Folder, Finish, Apply and Close, now select Alternative JRE jre1.8xxxx, click Finish, and Apply and Close.
+	- If Workspace default JRE is "JRE1.8xxxx" (where xxxx is the build version), then click that, finish & apply.
+	- If you do not see JRE1.8xxxx, but you know the JDK or JRE is installed, then Install JREs, Add..., Standard VM, Directory..., navigate to the folder jre1.8xxxx (usually within Program Files), highlight and Select Folder, Finish, Apply and Close, now select Alternative JRE jre1.8xxxx, click Finish, and Apply and Close.
 	- If none of the steps worked for you, check to see that Java 8 is installed on your machine.
 
 Extra:
