@@ -29,6 +29,14 @@ Dependencies:
 	- If you do not see JRE1.8xxxx, but you know the JDK or JRE is installed, then Install JREs, Add..., Standard VM, Directory..., navigate to the folder jre1.8xxxx (usually within Program Files), highlight and Select Folder, Finish, Apply and Close, now select Alternative JRE jre1.8xxxx, click Finish, and Apply and Close.
 	- If none of the steps worked for you, check to see that Java 8 is installed on your machine.
 
+Branching:
+  - To better organize our code, I would recommend creating a branches. A branch is basically a copy of the master, but we can keep it separated until the code is complete.
+  - To create a branch, right click on your Git Repository (in the Git Perspective) and click Switch To, New Branch, and enter a branch name (something to let other's know what exactly you're working on).
+  - Write the code you want. You can also push the new branch to Github to discuss the code with your team.
+  - When you're done coding, and you have committed to your branch. You can try to merge to the master branch (only do so if your code is completed).
+  - To merge a branch, 
+  - I am currently testing branching.
+
 Extra:
   - JavaFX Scene Builder
     - Download at: https://gluonhq.com/products/scene-builder/#download
