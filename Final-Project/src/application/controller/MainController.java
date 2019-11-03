@@ -11,11 +11,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Cameron
+ * This is the Controller for the Main.fxml
+ */
+
 public class MainController implements EventHandler<ActionEvent>{
 	
 	@FXML
 	private Button startButton, scoreButton, exitButton;
 
+	/**
+	 * This is the handle method it takes an ActionEvent from button clicks on Main.fxml
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
