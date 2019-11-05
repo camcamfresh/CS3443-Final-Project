@@ -36,16 +36,24 @@ public class MainController implements EventHandler<ActionEvent>{
 				stage.setScene(new Scene(root));
 				stage.show();
 			}
-			catch(Exception e) {}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		else if(event.getSource() == scoreButton) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("*** Score FXML ***"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Score.fxml"));
 				Parent root = (Parent) loader.load();
+				
+				ScoreController controller = loader.getController();
+				controller.init();
+				
 				stage.setScene(new Scene(root));
 				stage.show();
 			}
-			catch(Exception e) {}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		else if(event.getSource() == exitButton) {
 			Platform.exit();
