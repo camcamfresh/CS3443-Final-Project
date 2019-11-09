@@ -48,16 +48,18 @@ TBA
 
 ### To Be Started:
 ### Work In Progress:
+ - Coding (everyone)
+ 	- Menus and FXMLs (Cameron)
+	- Making the game run (Chase)
+	- Configuring user input (Kyle)
+	- Creating and updating the model (Cary)
+
+### Completed:
  - Come up with team name (everyone).
  - Come up with an awesome, but feasible application idea (everyone).
  - Determine scope of application (everyone).
  - Organize components of idea and comply with MVC design pattern (everyone).
  - Create UML diagram of application (anyone)
- - Begin Coding (everyone)
- 
-
-### Completed:
-
 
 
 ### When Finished:
