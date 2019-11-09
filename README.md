@@ -44,9 +44,11 @@ Extra:
 
 
 ### Application Idea
-TBA
+Snake game
 
 ### To Be Started:
+- Reading and writing to highscore.csv
+
 ### Work In Progress:
  - Coding (everyone)
  	- Menus and FXMLs (Cameron)
