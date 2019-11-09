@@ -1,5 +1,7 @@
 package application.model;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Cary Inzerello
@@ -9,13 +11,14 @@ public class Snake extends Collidable{
 	
 	private int length;
 	private int direction;	//0 = not moving, 1 = up, 2 = right, 3 = down, 4 = left
+	private ArrayList<Position> path = new ArrayList<Position>();
 	
 	/**
 	 * Constructor
 	 */
 	public Snake() {
 		super();
-		this.length = 0;
+		this.length = 1;
 		this.direction = 0;
 	}
 	
@@ -62,7 +65,61 @@ public class Snake extends Collidable{
 			//you lose 
 		}
 	}
+	/**
+	 * Adds current position to the path and deletes the last one when it is past the length
+	 */
+	public void updatePath() {
+		path.add(new Position(getX(), getY()));
+		if(path.size()>this.length)
+			path.remove(0);
+	}	
 	
+	/**
+	 * @return the path
+	 */
+	public ArrayList<Position> getPath() {
+		return path;
+	}
+	
+	public class Position{
+		private int x;
+		private int y;
+		
+		/**
+		 * @param x
+		 * @param y
+		 */
+		public Position(int x, int y) {
+			super();
+			this.x = x;
+			this.y = y;
+		}
+		/**
+		 * @return the x
+		 */
+		public int getX() {
+			return x;
+		}
+		/**
+		 * @param x the x to set
+		 */
+		public void setX(int x) {
+			this.x = x;
+		}
+		/**
+		 * @return the y
+		 */
+		public int getY() {
+			return y;
+		}
+		/**
+		 * @param y the y to set
+		 */
+		public void setY(int y) {
+			this.y = y;
+		}
+		
+	}
 	
 
 }
