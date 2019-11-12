@@ -47,7 +47,7 @@ Extra:
 Snake game
 
 ### To Be Started:
-- Reading and writing to highscore.csv
+
 
 ### Work In Progress:
  - Coding (everyone)
@@ -62,6 +62,7 @@ Snake game
  - Determine scope of application (everyone).
  - Organize components of idea and comply with MVC design pattern (everyone).
  - Create UML diagram of application (anyone)
+ - Reading and writing to highscore.csv (Cameron)
 
 
 ### When Finished:
