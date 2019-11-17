@@ -4,9 +4,14 @@ public class GameController implements Initializable {
 
 	
   // @author Kyle Horsman
-  // WIP
   
-  public Scene addController(Scene scene, Snake snake){
+  	/**
+	 * Adds the ability to control the snake to the scene
+	 * @param scene
+	 * @param snake
+	 * @return scene
+	 */
+	public Scene addController(Scene scene, Snake snake){
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
 
 			@Override
@@ -31,9 +36,19 @@ public class GameController implements Initializable {
 		return scene;
 	}
   
+	
+	
+	/**
+	 * the logic for running the game
+	 * @param s : the snake
+	 * @param b	: the bounds of the playing screen
+	 */
 	public void startGame(Snake s, Bounds b){
 		
+		s.setX(b.getMaxX() / 2);
+		s.setY(b.getMaxY() / 2);
 		Pellet p = new Pellet();
+		p.move();
 		
 		while(true){
 			if(s.getX() >= b.getMaxX() || s.getX() <= b.getMinX()
@@ -60,6 +75,8 @@ public class GameController implements Initializable {
 		scene = addController(scene, snake);
 		Stage stage = new Stage();
 		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.show();
 		startGame(snake, bound);
 	}
   
