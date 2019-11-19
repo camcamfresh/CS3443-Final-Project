@@ -14,6 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * @author Cameron
+ */
 public class ScoreController implements EventHandler<ActionEvent>{
 	
 	@FXML
@@ -23,12 +26,15 @@ public class ScoreController implements EventHandler<ActionEvent>{
 	@FXML
 	private Button menuButton;
 	
+	/**
+	 * @apiNote This methods handles the "Back to Menu" Button.
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == menuButton) {
 			try {
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Main.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Main.fxml"));
 				Parent root = (Parent) loader.load();
 				stage.setScene(new Scene(root));
 				stage.show();
@@ -40,8 +46,8 @@ public class ScoreController implements EventHandler<ActionEvent>{
 	}
 	
 	/**
-	 * This method initializes the object by loading the scores provided in the HighScore Model.
-	 * It should be called before the stage is shown.
+	 * @apiNote This method initializes the object by loading the scores provided in the HighScore Model.
+	 * @apiNote This should be called before the stage is shown.
 	 */
 	public void init() {
 		ArrayList<HighScore> users = HighScore.getAllUserScores();

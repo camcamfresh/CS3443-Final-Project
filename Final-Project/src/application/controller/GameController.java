@@ -1,9 +1,22 @@
 package application.controller;
 
-public class GameController implements Initializable {
+import java.net.URL;
+import java.util.ResourceBundle;
+import application.model.Pellet;
+import application.model.Snake;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-	
-  // @author Kyle Horsman
+/**
+ * @author Kyle Horsman
+ *
+ */
+public class GameController implements Initializable {
   
   	/**
 	 * Adds the ability to control the snake to the scene
@@ -45,8 +58,8 @@ public class GameController implements Initializable {
 	 */
 	public void startGame(Snake s, Bounds b){
 		
-		s.setX(b.getMaxX() / 2);
-		s.setY(b.getMaxY() / 2);
+		s.setX((int) b.getMaxX() / 2);
+		s.setY((int) b.getMaxY() / 2);
 		Pellet p = new Pellet();
 		p.move();
 		
@@ -63,7 +76,6 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		int x = 800;
