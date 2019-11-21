@@ -8,32 +8,43 @@ package application.model;
 
 public abstract class Collidable {
 	
-	private int x;
-	private int y;
+	private Position posit;
 	
+	/**
+	 * @return the pos
+	 */
+	public Position getPos() {
+		return posit;
+	}
+	/**
+	 * @param pos the pos to set
+	 */
+	public void setPos(Position pos) {
+		this.posit = pos;
+	}
 	/**
 	 * @return the x
 	 */
 	public int getX() {
-		return x;
+		return this.posit.getY();
 	}
 	/**
 	 * @param x the x to set
 	 */
 	public void setX(int x) {
-		this.x = x;
+		this.posit.setX(x);
 	}
 	/**
 	 * @return the y
 	 */
 	public int getY() {
-		return y;
+		return this.posit.getY();
 	}
 	/**
 	 * @param y the y to set
 	 */
 	public void setY(int y) {
-		this.y = y;
+		this.posit.setY(y);
 	}
 	
 	/**
