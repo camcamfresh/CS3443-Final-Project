@@ -33,8 +33,16 @@ public class MainController implements EventHandler<ActionEvent>{
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Game.fxml"));
 				Parent root = (Parent) loader.load();
+				
+				GameController controller = loader.getController();
+				controller.init();
+				
 				stage.setScene(new Scene(root));
 				stage.show();
+				
+				stage.getScene().setOnKeyPressed(controller.keyPressed);
+				stage.getScene().setOnKeyReleased(controller.keyReleased);
+				controller.start();
 			}
 			catch(Exception e) {
 				e.printStackTrace();
