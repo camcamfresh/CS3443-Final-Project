@@ -123,7 +123,7 @@ public class GameController implements EventHandler<ActionEvent>{
 		//int x = gameWidth/2;
 		//int y = gameHeight/2;
 		
-		this.snake = new Snake();
+		this.s = new Snake();
 		
 		Rectangle snakeHead = new Rectangle(x, y, 10, 10);
 		snakeHead.setFill(Color.RED);
