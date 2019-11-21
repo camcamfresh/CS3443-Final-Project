@@ -1,7 +1,6 @@
 package application.controller;
 
 import java.util.ArrayList;
-
 import application.model.Snake;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -26,6 +25,7 @@ import javafx.util.Duration;
  * @author chase christenson and kyle horsman
  *
  */
+
 
 public class GameController implements EventHandler<ActionEvent>{
 	
@@ -95,8 +95,8 @@ public class GameController implements EventHandler<ActionEvent>{
 	 */
 	public void startGame(Snake s, Bounds b){
 		
-		s.setX(b.getMaxX() / 2);
-		s.setY(b.getMaxY() / 2);
+		s.setX((int) b.getMaxX() / 2);
+		s.setY((int) b.getMaxY() / 2);
 		Pellet p = new Pellet();
 		p.move();
 		
@@ -113,14 +113,9 @@ public class GameController implements EventHandler<ActionEvent>{
 		}
 	}
 	
-	/**
-	 * This method initializes the Game Board starting with a snake with length 1 and 1 pellet
-	 * It should be called before the stage is shown.
-	 */
-	public void init() {
-		//int x = gameWidth/2;
-		//int y = gameHeight/2;
-		
+
+	public void initialize(URL arg0, ResourceBundle arg1) {
+    
 		this.s = new Snake();
 		
 		Rectangle snakeHead = new Rectangle(x, y, 10, 10);

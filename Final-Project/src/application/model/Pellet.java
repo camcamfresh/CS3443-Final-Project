@@ -1,16 +1,14 @@
 package application.model;
 
 import java.util.Random;
-/**
- * 
- * @author Cary Inzerello
- *
- */
 
+/**
+ * @author Cary Inzerello
+ */
 public class Pellet extends Collidable{
 	
 	@Override
-	void collideResponse(Collidable c) {
+	public void collideResponse(Collidable c) {
 		this.move();		
 	}
 	
