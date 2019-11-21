@@ -3,9 +3,7 @@ package application.model;
 import java.util.ArrayList;
 
 /**
- * 
  * @author Cary Inzerello
- *
  */
 public class Snake extends Collidable{
 	
@@ -14,7 +12,7 @@ public class Snake extends Collidable{
 	private ArrayList<Position> path = new ArrayList<Position>();
 	
 	/**
-	 * Constructor
+	 * @apiNote Constructor; sets length to 1 & direction to 0 (not moving)
 	 */
 	public Snake() {
 		super();
@@ -23,7 +21,7 @@ public class Snake extends Collidable{
 	}
 	
 	/**
-	 * Gets the snake's length
+	 * @apiNote Gets the snake's length
 	 * @return int : snake's length
 	 */
 	public int getLength() {
@@ -31,14 +29,14 @@ public class Snake extends Collidable{
 	}
 
 	/**
-	 * Sets the snake's length
+	 * @apiNote Sets the snake's length
 	 * @param length int : snake's length
 	 */
 	public void setLength(int length) {
 		this.length = length;
 	}
 	/**
-	 * Gets the snake's direction
+	 * @apiNote Gets the snake's direction
 	 * @return int : snake's direction
 	 */
 	public int getDirection() {
@@ -46,7 +44,7 @@ public class Snake extends Collidable{
 	}
 
 	/**
-	 * Gets the snake's direction
+	 * @apiNote Gets the snake's direction
 	 * @param direction int : snake's direction
 	 */
 	public void setDirection(int direction) {
@@ -54,11 +52,11 @@ public class Snake extends Collidable{
 	}
 
 	/**
-	 * Reacts to the snake colliding with anything. If it's a pellet, the length increases. Else it triggers the lose state. 
+	 * @apiNote Reacts to the snake colliding with anything. If it's a pellet, the length increases. Else it triggers the lose state. 
 	 * @param c Collidable : The object the snake collided with.
 	 */
 	@Override
-	void collideResponse(Collidable c) {
+	public void collideResponse(Collidable c) {
 		if(c.getClass().equals(new Pellet().getClass())) 
 				this.length++;
 		else {
@@ -66,7 +64,7 @@ public class Snake extends Collidable{
 		}
 	}
 	/**
-	 * Adds current position to the path and deletes the last one when it is past the length
+	 * @apiNote Adds current position to the path and deletes the last one when it is past the length
 	 */
 	public void updatePath() {
 		path.add(new Position(getX(), getY()));
@@ -81,6 +79,9 @@ public class Snake extends Collidable{
 		return path;
 	}
 	
+	/**
+	 * @author Cary Inzerello
+	 */
 	public class Position{
 		private int x;
 		private int y;

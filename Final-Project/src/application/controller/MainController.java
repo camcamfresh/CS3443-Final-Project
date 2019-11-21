@@ -31,7 +31,7 @@ public class MainController implements EventHandler<ActionEvent>{
 		
 		if(event.getSource() == startButton) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("*** Game FXML ***"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Game.fxml"));
 				Parent root = (Parent) loader.load();
 				stage.setScene(new Scene(root));
 				stage.show();
@@ -42,7 +42,7 @@ public class MainController implements EventHandler<ActionEvent>{
 		}
 		else if(event.getSource() == scoreButton) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Score.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Score.fxml"));
 				Parent root = (Parent) loader.load();
 				
 				ScoreController controller = loader.getController();
