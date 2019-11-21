@@ -1,42 +1,92 @@
 package application.controller;
 
-public class GameController implements Initializable {
+import java.util.ArrayList;
 
+import application.model.Snake;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+
+/**
+ * @author chase christenson and kyle horsman
+ *
+ */
+
+public class GameController implements EventHandler<ActionEvent>{
 	
-  // @author Kyle Horsman
-  
-  	/**
-	 * Adds the ability to control the snake to the scene
-	 * @param scene
-	 * @param snake
-	 * @return scene
-	 */
-	public Scene addController(Scene scene, Snake snake){
-		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-
-			@Override
-			public void handle(KeyEvent k) {
-				switch(k.getCode().toString()){
-			  		case "UP":
-			  			snake.setDirection(1);
-			  			break;
-			  		case "DOWN":
-			  			snake.setDirection(3);
-			  			break;
-			  		case "LEFT":
-			  			snake.setDirection(4);
-			  			break;
-			  		case "RIGHT":
-			  			snake.setDirection(2);
-			  			break;
-				}
+	private Snake s;
+	private ArrayList<Rectangle> snakeRectangles = new ArrayList<Rectangle>();
+	private int gameWidth = 600;
+	private int gameHeight = 400;
+	
+	private int x = gameWidth/2;
+	private int y = gameHeight/2;
+	
+	private int rWidth = 10;
+	//private Boolean paused = false;
+	
+	@FXML
+	private Button menuButton;
+	public Pane gamePane;
+	
+	public void start(){
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(40), event -> {
+			if(s.getDirection() == 1){
+        		if(y == 0){
+        			y = gameHeight - rWidth;
+        		}
+        		else{
+        			y = y - rWidth;
+        		}
+        		snakeRectangles.get(0).setY(y);
+        	}
+        	else if(s.getDirection() == 2){
+        		if(x == gameWidth - rWidth){
+        			x = 0;
+        		}
+        		else{
+        			x = x + rWidth;
+        		}
+        		snakeRectangles.get(0).setX(x);
+        	}
+			else if(s.getDirection() == 3){
+				if(y == gameHeight - rWidth){
+        			y = 0;
+        		}
+        		else{
+        			y = y + rWidth;
+        		}
+        		snakeRectangles.get(0).setY(y);
 			}
-		
-		});
-		return scene;
+			else if(s.getDirection() == 4){
+				if(x == 0){
+        			x = gameWidth - rWidth;
+        		}
+        		else{
+        			x = x - rWidth;
+        		}
+        		snakeRectangles.get(0).setX(x);
+			}
+
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
 	}
-  
-	
 	
 	/**
 	 * the logic for running the game
@@ -63,21 +113,94 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	/**
+	 * This method initializes the Game Board starting with a snake with length 1 and 1 pellet
+	 * It should be called before the stage is shown.
+	 */
+	public void init() {
+		//int x = gameWidth/2;
+		//int y = gameHeight/2;
 		
-		int x = 800;
-		int y = 800;
-		Pane pane = new Pane();
-		Bounds bound = pane.getBoundsInLocal();
-		Snake snake = new Snake();
-		Scene scene = new Scene(pane, x, y);
-		scene = addController(scene, snake);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		stage.setResizable(false);
-		stage.show();
-		startGame(snake, bound);
+		this.s = new Snake();
+		
+		Rectangle snakeHead = new Rectangle(x, y, 10, 10);
+		snakeHead.setFill(Color.RED);
+		
+		this.snakeRectangles.add(snakeHead);
+		gamePane.getChildren().add(snakeHead);
 	}
-  
+	
+    public EventHandler<KeyEvent> keyReleased = new EventHandler<KeyEvent>() {
+
+        @Override
+        public void handle(KeyEvent event) {
+        	switch (event.getCode()) {
+	        	case UP:
+	            		snake.setDirection(1);
+	            		break;
+	           	case DOWN:
+	            		snake.setDirection(3);
+	            		break;
+	            	case RIGHT:
+	            		snake.setDirection(2);
+	            		break;
+	            	case LEFT:
+	            		snake.setDirection(4);
+	            		break;
+	            	case ENTER:
+	            		snake.setDirection(0);
+	            		//paused = true;
+	            		break;
+			default:
+				break;
+        	}	
+        
+        }
+    };
+
+    public EventHandler<KeyEvent> keyPressed = new EventHandler<KeyEvent>() {
+
+        @Override
+        public void handle(KeyEvent event) {
+            // start movement according to key pressed
+        	switch (event.getCode()) {
+	        	case UP:
+	            		snake.setDirection(1);
+	            		break;
+	           	case DOWN:
+	            		snake.setDirection(3);
+	            		break;
+	            	case RIGHT:
+	            		snake.setDirection(2);
+	            		break;
+	            	case LEFT:
+	            		snake.setDirection(4);
+	            		break;
+	            	case ENTER:
+	            		snake.setDirection(0);
+	            		//paused = true;
+	            		break;
+			default:
+				break;
+        	}
+
+        }
+    };
+
+	@Override
+	public void handle(ActionEvent event) {
+		// TODO Auto-generated method stub
+		if(event.getSource() == menuButton) {
+			try {
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Main.fxml"));
+				Parent root = (Parent) loader.load();
+				stage.setScene(new Scene(root));
+				stage.show();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
