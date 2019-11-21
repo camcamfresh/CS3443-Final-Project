@@ -119,9 +119,11 @@ public class GameController implements EventHandler<ActionEvent>{
 	}
 	
 
-	public void initialize(URL arg0, ResourceBundle arg1) {
-    
-		this.s = new Snake();
+	public void init() {
+		//int x = gameWidth/2;
+		//int y = gameHeight/2;
+		
+		this.snake = new Snake();
 		
 		Rectangle snakeHead = new Rectangle(x, y, 10, 10);
 		snakeHead.setFill(Color.RED);
