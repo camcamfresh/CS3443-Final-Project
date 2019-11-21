@@ -193,7 +193,7 @@ public class GameController implements EventHandler<ActionEvent>{
 		if(event.getSource() == menuButton) {
 			try {
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Main.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Main.fxml"));
 				Parent root = (Parent) loader.load();
 				stage.setScene(new Scene(root));
 				stage.show();
