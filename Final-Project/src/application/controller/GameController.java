@@ -51,9 +51,13 @@ public class GameController implements EventHandler<ActionEvent>{
 	
 	public void start(){
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(40), event -> {
+			
+			GameEnder end = new GameEnder((Stage) gamePane.getScene().getWindow(), s, "name");
+			
 			if(s.getDirection() == 1){
         		if(y == 0){
         			y = gameHeight - rWidth;
+				end.endGame();
         		}
         		else{
         			y = y - rWidth;
@@ -63,6 +67,7 @@ public class GameController implements EventHandler<ActionEvent>{
         	else if(s.getDirection() == 2){
         		if(x == gameWidth - rWidth){
         			x = 0;
+				end.endGame();
         		}
         		else{
         			x = x + rWidth;
@@ -72,6 +77,7 @@ public class GameController implements EventHandler<ActionEvent>{
 			else if(s.getDirection() == 3){
 				if(y == gameHeight - rWidth){
         			y = 0;
+				end.endGame();
         		}
         		else{
         			y = y + rWidth;
@@ -81,6 +87,7 @@ public class GameController implements EventHandler<ActionEvent>{
 			else if(s.getDirection() == 4){
 				if(x == 0){
         			x = gameWidth - rWidth;
+				end.endGame();
         		}
         		else{
         			x = x - rWidth;
