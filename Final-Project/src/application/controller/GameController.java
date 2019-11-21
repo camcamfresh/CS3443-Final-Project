@@ -1,6 +1,10 @@
 package application.controller;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import application.model.Pellet;
 import application.model.Snake;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -9,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -131,19 +136,19 @@ public class GameController implements EventHandler<ActionEvent>{
         public void handle(KeyEvent event) {
         	switch (event.getCode()) {
 	        	case UP:
-	            		snake.setDirection(1);
+	            		s.setDirection(1);
 	            		break;
 	           	case DOWN:
-	            		snake.setDirection(3);
+	            		s.setDirection(3);
 	            		break;
 	            	case RIGHT:
-	            		snake.setDirection(2);
+	            		s.setDirection(2);
 	            		break;
 	            	case LEFT:
-	            		snake.setDirection(4);
+	            		s.setDirection(4);
 	            		break;
 	            	case ENTER:
-	            		snake.setDirection(0);
+	            		s.setDirection(0);
 	            		//paused = true;
 	            		break;
 			default:
@@ -160,19 +165,19 @@ public class GameController implements EventHandler<ActionEvent>{
             // start movement according to key pressed
         	switch (event.getCode()) {
 	        	case UP:
-	            		snake.setDirection(1);
+	            		s.setDirection(1);
 	            		break;
 	           	case DOWN:
-	            		snake.setDirection(3);
+	            		s.setDirection(3);
 	            		break;
 	            	case RIGHT:
-	            		snake.setDirection(2);
+	            		s.setDirection(2);
 	            		break;
 	            	case LEFT:
-	            		snake.setDirection(4);
+	            		s.setDirection(4);
 	            		break;
 	            	case ENTER:
-	            		snake.setDirection(0);
+	            		s.setDirection(0);
 	            		//paused = true;
 	            		break;
 			default:
