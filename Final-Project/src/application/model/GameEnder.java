@@ -3,13 +3,14 @@ package application.model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import application.controller.ScoreController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * @author Kyle Horsman
+ * @author Kyle Horsman and Cameron Salazar
  *
  */
 public class GameEnder {
@@ -18,7 +19,7 @@ public class GameEnder {
 	private Snake snake;
 	private String name;
 	
-	// Constuctor
+	// Constructor
 	public GameEnder(Stage stage, Snake snake, String name){
 		this.stage = stage;
 		this.snake = snake;
@@ -29,16 +30,17 @@ public class GameEnder {
 	 * Ends game and loads ScoreController
 	 */
 	public void endGame(){
-		HighScore score = new HighScore(snake.getLength(), name);
-		//score.saveToFile();
-		
-		//testing
-		System.out.println(snake.getLength() + " " + name);
-		//
+		new HighScore(snake.getLength(), name);
+		HighScore.saveToFile();
 		
 		try {
-			Pane root = FXMLLoader.load(getClass().getResource("/application/view/Score.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/Score.fxml"));
+			Pane root = loader.load();
 			stage.setScene(new Scene(root));
+			
+			ScoreController controller = loader.getController();
+			controller.init();
+			
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

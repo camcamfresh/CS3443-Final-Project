@@ -135,12 +135,8 @@ public class HighScore {
 		File scoresFile = new File(fileName);
 		try {
 			FileWriter scoresToFile = new FileWriter(scoresFile);
-			int count = 0;
 			for(HighScore score : allScores) {
 				scoresToFile.write(score.getName() + ", " + String.valueOf(score.getScore())+"\n");
-				if(++count > 5) {
-					break;
-				}
 			}
 			
 			scoresToFile.close();
@@ -150,10 +146,4 @@ public class HighScore {
 			e.printStackTrace();
 		}
 	}
-	/*
-	public static void main(String args[]) {
-		HighScore h = new HighScore(20000, "Big Boss");	
-		h.saveToFile();
-	}
-	*/
 }
