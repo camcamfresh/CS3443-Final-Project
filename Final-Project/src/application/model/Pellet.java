@@ -17,8 +17,8 @@ public class Pellet extends Collidable{
 	 */
 	public void move() {
 		Random rand = new Random();
-		int x = rand.nextInt(255);
-		int y = rand.nextInt(255);
+		int x = 10*Math.round(rand.nextInt(590)/10);
+		int y = 10*Math.round(rand.nextInt(390)/10);
 		this.setX(x);
 		this.setY(y);
 	}
