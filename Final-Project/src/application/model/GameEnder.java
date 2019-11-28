@@ -30,7 +30,7 @@ public class GameEnder {
 	 * Ends game and loads ScoreController
 	 */
 	public void endGame(){
-		new HighScore(snake.getLength(), name);
+		new HighScore(snake.getLength()*100, name);
 		HighScore.saveToFile();
 		
 		try {
