@@ -41,7 +41,6 @@ public class MainController implements EventHandler<ActionEvent>{
 				stage.show();
 				
 				stage.getScene().setOnKeyPressed(controller.keyPressed);
-				stage.getScene().setOnKeyReleased(controller.keyReleased);
 				controller.start();
 			}
 			catch(Exception e) {

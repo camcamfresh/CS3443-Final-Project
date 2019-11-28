@@ -26,7 +26,7 @@ public abstract class Collidable {
 	 * @return the x
 	 */
 	public int getX() {
-		return this.posit.getY();
+		return this.posit.getX();
 	}
 	/**
 	 * @param x the x to set

@@ -4,8 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import application.model.GameBoard;
 import application.model.GameEnder;
 import application.model.Pellet;
+import application.model.Position;
 import application.model.Snake;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -37,17 +39,16 @@ import javafx.util.Duration;
 
 public class GameController implements EventHandler<ActionEvent>{
 	private Snake s;
-	private ArrayList<Rectangle> snakeRectangles = new ArrayList<Rectangle>();
+	private Pellet p;
+	private GameBoard board;
+	
+	private Position snakePosit;
+	private Position pelletPosit;
+	
 	private Timeline timeline;
-	
-	private int gameWidth = 600;
-	private int gameHeight = 400;
-	
-	private int x = gameWidth / 2;
-	private int y = gameHeight / 2;
-	
-	private int rWidth = 10;
-	//private Boolean paused = false;
+	private final int GAME_WIDTH = 600;
+	private final int GAME_HEIGHT = 400;
+	private final int R_WIDTH = 10;
 	
 	@FXML
 	private Button menuButton, submitButton;
@@ -62,52 +63,71 @@ public class GameController implements EventHandler<ActionEvent>{
 	public Pane gamePane;
 	
 	public void init() {
-		this.s = new Snake();
+		s = new Snake();
+		p = new Pellet();
+		board = new GameBoard();
 		
-		Rectangle snakeHead = new Rectangle(x, y, 10, 10);
-		snakeHead.setFill(Color.RED);
+		snakePosit = new Position(GAME_WIDTH/2, GAME_HEIGHT/2);
+		pelletPosit = new Position(0,0);
 		
-		this.snakeRectangles.add(snakeHead);
-		gamePane.getChildren().add(snakeHead);
+		s.setPos(snakePosit);
+		s.updatePath();
+
+		//Finds spot to start pellet where snake isn't
+		p.setPos(pelletPosit);
+		do{
+			p.move();
+		}while(p.getX() == s.getX() && p.getY() == s.getY());
+		
+		board.addSnakeBlock(s.getX(), s.getY(), R_WIDTH);
+		board.addPellet(p.getX(), p.getY(), R_WIDTH);
+		
+		gamePane.getChildren().addAll(board.sBlocks);
+		gamePane.getChildren().add(board.pBlock);
+		
 	}
 	
 	public void start(){
-		timeline = new Timeline(new KeyFrame(Duration.millis(40), event -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(80), event -> {
+			//Move Up
 			if(s.getDirection() == 1){
-        		if(y == 0){
-        			endGame();
-        		}
-        		else{
-        			y = y - rWidth;
-        		}
-        		snakeRectangles.get(0).setY(y);
-        	}
-        	else if(s.getDirection() == 2){
-        		if(x == gameWidth - rWidth){
-        			endGame();
-        		}
-        		else{
-        			x = x + rWidth;
-        		}
-        		snakeRectangles.get(0).setX(x);
-        	}
-			else if(s.getDirection() == 3){
-				if(y == gameHeight - rWidth){
-        			endGame();
-        		}
-        		else{
-        			y = y + rWidth;
-        		}
-        		snakeRectangles.get(0).setY(y);
+				if(s.getY() == 0){
+					endGame();
+				}
+				else{ 
+					s.setY(s.getY() - R_WIDTH);
+					this.collisionCheck();
+				}
 			}
+			//Move Right
+			else if(s.getDirection() == 2){
+				if(s.getX() == GAME_WIDTH - R_WIDTH){
+					endGame();
+				}
+				else{
+					s.setX(s.getX() + R_WIDTH);
+					this.collisionCheck();
+				}
+			}
+			//Move Down
+			else if(s.getDirection() == 3){
+				if(s.getY() == GAME_HEIGHT - R_WIDTH){
+        				endGame();
+				}
+				else{
+					s.setY(s.getY() + R_WIDTH);
+					this.collisionCheck();
+				}
+			}
+			//Move Left
 			else if(s.getDirection() == 4){
-				if(x == 0){
-        			endGame();
-        		}
-        		else{
-        			x = x - rWidth;
-        		}
-        		snakeRectangles.get(0).setX(x);
+				if(s.getX() == 0){
+        				endGame();
+				}
+				else{
+					s.setX(s.getX() - R_WIDTH);
+					this.collisionCheck();
+				}
 			}
 			
 			updateScoreLabel();
@@ -120,7 +140,7 @@ public class GameController implements EventHandler<ActionEvent>{
 		scoreLabel.setText(String.valueOf(s.getLength() * 100));		
 	}
 	
-    private void endGame() {
+    	private void endGame() {
 		timeline.stop();
 		
 		gameOverLabel.setVisible(true);
@@ -128,6 +148,46 @@ public class GameController implements EventHandler<ActionEvent>{
 		nameText.setVisible(true);
 		submitButton.setVisible(true);		
 	}
+    
+    public void collisionCheck(){
+    	if(s.collideWith(p)){
+    		System.out.println("Pellet Collision");
+    		s.setLength(s.getLength()+1);
+
+    		int x = s.getX();
+    		int y = s.getY();
+    		
+    		Rectangle tempBlock = board.addSnakeBlock(x, y, R_WIDTH);
+    		gamePane.getChildren().add(tempBlock);
+    		
+    		s.updatePath();
+    		board.moveSnake(s.getPath());
+    		movePellet();
+    	}
+    	else{
+	    	ArrayList<Position> tempPath = s.getPath();
+	    	for(int i = 0; i < tempPath.size(); i++){
+	    		if(s.getX() == tempPath.get(i).getX() && s.getY() == tempPath.get(i).getY()){
+	    			endGame();
+	    		}
+	    	}
+	    	s.updatePath();
+	    	board.moveSnake(s.getPath());
+    	}
+    }
+    
+    public void movePellet(){
+    	Boolean spaceOccupied = false;
+    	do{
+    		p.move();
+    		for(int i = 0; i < s.getLength(); i++){
+    			if(p.getX() == s.getPath().get(i).getX() && p.getY() == s.getPath().get(i).getY())
+    				spaceOccupied = true;
+    		}
+    	}while(spaceOccupied == true);
+    	board.pBlock.setX(p.getX());
+    	board.pBlock.setY(p.getY());
+    }
 
     public EventHandler<KeyEvent> keyPressed = new EventHandler<KeyEvent>() {
 
@@ -136,21 +196,25 @@ public class GameController implements EventHandler<ActionEvent>{
             // start movement according to key pressed
         	switch (event.getCode()) {
 	        	case UP:
-	            		s.setDirection(1);
-	            		break;
+	        		if(s.getDirection() != 3)
+	        			s.setDirection(1);
+	            	break;
 	           	case DOWN:
-	            		s.setDirection(3);
-	            		break;
-	            	case RIGHT:
+	           		if(s.getDirection() != 1)
+	           			s.setDirection(3);
+	            	break;
+	            case RIGHT:
+	            	if(s.getDirection() != 4)
 	            		s.setDirection(2);
-	            		break;
-	            	case LEFT:
+	            	break;
+	            case LEFT:
+	            	if(s.getDirection() != 2)
 	            		s.setDirection(4);
-	            		break;
-	            	case ENTER:
-	            		s.setDirection(0);
-	            		//paused = true;
-	            		break;
+	            	break;
+	            case ENTER:
+	            	s.setDirection(0);
+	            	//paused = true;
+	            	break;
 			default:
 				break;
         	}
@@ -178,8 +242,8 @@ public class GameController implements EventHandler<ActionEvent>{
 			finishGame.endGame();
 		}
 	}
-	
-	//Unused methods below
+        
+	//Unused methods beloW
     
 	/**
 	 * the logic for running the game
@@ -205,33 +269,5 @@ public class GameController implements EventHandler<ActionEvent>{
 			}
 		}
 	}
-	
-    public EventHandler<KeyEvent> keyReleased = new EventHandler<KeyEvent>() {
-
-        @Override
-        public void handle(KeyEvent event) {
-        	switch (event.getCode()) {
-	        	case UP:
-	            		s.setDirection(1);
-	            		break;
-	           	case DOWN:
-	            		s.setDirection(3);
-	            		break;
-	            	case RIGHT:
-	            		s.setDirection(2);
-	            		break;
-	            	case LEFT:
-	            		s.setDirection(4);
-	            		break;
-	            	case ENTER:
-	            		s.setDirection(0);
-	            		//paused = true;
-	            		break;
-			default:
-				break;
-        	}	
-        
-        }
-    };
 	
 }
