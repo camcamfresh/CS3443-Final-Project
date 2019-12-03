@@ -4,9 +4,9 @@
 Features:
   - Snake game
     - Control a snake using the arrow keys 
-    - eating pellets makes the snake longer
+    - Eating pellets makes the snake longer
     - Try to eat as many pellets as possible while avoiding running into walls or your tail
-    - 
+
   - High Score System
     - Stores the top 5 high scores and automatically updates when a new high score is reached
     - Allows players to enter their name to go with their score
